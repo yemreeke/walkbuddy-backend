@@ -58,6 +58,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(UserSteps::class, 'user_id', 'id');
     }
 
+    public function ibanTransfers()
+    {
+        return $this->hasMany(IbanTransfers::class, 'user_id', 'id');
+    }
+
 
     // public function files()
     // {

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class IbanTransfers extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'iban_no',
+        'tl_price',
+    ];
 }

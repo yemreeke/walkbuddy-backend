@@ -28,12 +28,13 @@ class IbanTransfersController extends Controller
                 return response()->error("Yeterli coininiz bulunmamaktadır.", "", 400);
             } else {
                 $user->coin_count -= $coin;
-                $user->save();
+
                 $user->ibanTransfers()->create([
                     'iban_no' => $iban_no,
                     'tl_price' => $tl_price,
                 ]);
-                return response()->success(null, "Hesabınıza " . $tl_price . "₺ para aktarılmıştır.");
+                $user->save();
+                return response()->success(null);
             }
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
