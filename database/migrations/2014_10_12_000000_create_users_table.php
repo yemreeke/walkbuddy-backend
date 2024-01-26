@@ -17,9 +17,8 @@ return new class extends Migration {
             $table->string('surname');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('profile_photo');
-            $table->string('iban_no');
-            $table->integer('coin_count');
+            $table->string('iban_no')->nullable();
+            $table->integer('coin_count')->default(0);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
