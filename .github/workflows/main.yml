@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - prod
+      - main
 name:  🚀 Deploy
 jobs:
   FTP-Deploy-Action:
