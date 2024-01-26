@@ -1,18 +1,9 @@
 <?php
 
-use App\Http\Controllers\AwsTranslateController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CopyrightMessagesController;
-use App\Http\Controllers\FavoritesController;
-use App\Http\Controllers\FilesController;
-use App\Http\Controllers\FirebasePushController;
-use App\Http\Controllers\ForgotPasswordCodesController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\SuggestionMessagesController;
+
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserSocialMediasController;
+use App\Http\Controllers\IbanTransfersController;
+use App\Http\Controllers\UserStepsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,13 +23,15 @@ Route::middleware(["jwt"])->group(function () {
     Route::delete('user/delete', [UserController::class, 'destroy']); // Kullanıcı siler
     Route::put("user/changePassword", [UserController::class, "changePassword"]); // Kullanıcı şifresini günceller
 
+    Route::post("steps/incUserSteps", [UserStepsController::class, "userStepInc"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+    Route::post("steps/lastSevenDayList", [UserStepsController::class, "lastSevenDayList"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+    Route::post("iban/transfer", [IbanTransfersController::class, "transfer"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
 });
 
 
 
 Route::middleware(["jwt", "admin"])->group(function () {
 
-    // Route::post("posts/viewSeedRandom", [PostsController::class, "viewSeedRandom"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
 
     // Route::get("messages/count", [SuggestionMessagesController::class, "count"]); // İstek Öneri mesajlarının sayısını getirir (Admin)
 
