@@ -57,9 +57,20 @@ class UserStepsController extends Controller
     public function lastSevenDayList(Request $request)
     {
         try {
+
             $user = Auth::user();
-            $lastSevenDayList = $user->userSteps()->whereDate('created_at', '>=', now()->subDays(7))->get();
-            return response()->success($lastSevenDayList);
+            $sevenDayList = [];
+
+            for ($i = 0; $i < 7; $i++) {
+                $date = now()->subDays($i)->startOfDay();
+                $step = $user->userSteps()->whereDate('created_at', '=', $date)->get()->first();
+                $dayInfo = [
+                    'date' => $date->toDateTimeString(),
+                    'count' => $step->step_count ?? 0,
+                ];
+                array_push($sevenDayList, $dayInfo);
+            }
+            return response()->success($sevenDayList);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
         } catch (\Exception $e) {

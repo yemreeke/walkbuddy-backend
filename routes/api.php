@@ -20,7 +20,6 @@ Route::get('products/list', [ProductsController::class, 'list']);
 Route::middleware(["jwt"])->group(function () {
 
     ### KULLANICI APİLERİ ###
-
     Route::get('user/self', [UserController::class, 'self']); // Kullanıcı bilgilerini getirir
     Route::put('user/update', [UserController::class, 'update']); // Kullanıcı bilgilerini günceller
     Route::delete('user/delete', [UserController::class, 'destroy']); // Kullanıcı siler
