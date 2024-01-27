@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,8 +83,10 @@ class UserStepsController extends Controller
             for ($i = 0; $i < 7; $i++) {
                 $date = now()->subDays($i)->startOfDay();
                 $step = $user->userSteps()->whereDate('created_at', '=', $date)->get()->first();
+                $dayOfWeek = ucfirst(Carbon::parse($date)->locale('tr_TR')->shortDayName);
                 $dayInfo = [
-                    'date' => $date->toDateTimeString(),
+                    // 'date' => $date->toDateTimeString(),
+                    'dayOfWeek' => $dayOfWeek,
                     "count" => ($step->step_count) ?? 0,
                 ];
                 array_push($sevenDayList, $dayInfo);
