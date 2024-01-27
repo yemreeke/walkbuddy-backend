@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Route;
 
 ### KULLANICI APİLERİ ###
 
-Route::post('user/login', [UserController::class, 'login']);
-Route::post('user/register', [UserController::class, 'register']);
-Route::get('products/list', [ProductsController::class, 'list']);
+Route::post('user/login', [UserController::class, 'login']); // Kullanıcı Girişi
+Route::post('user/register', [UserController::class, 'register']); // Kullanıcı Kaydı
+Route::get('products/list', [ProductsController::class, 'list']); // Ürünleri Listeler
 
 
 
@@ -25,15 +25,17 @@ Route::middleware(["jwt"])->group(function () {
     Route::delete('user/delete', [UserController::class, 'destroy']); // Kullanıcı siler
     Route::put("user/changePassword", [UserController::class, "changePassword"]); // Kullanıcı şifresini günceller
 
-    Route::post("steps/incUserSteps", [UserStepsController::class, "userStepInc"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
-    Route::post("steps/lastSevenDayList", [UserStepsController::class, "lastSevenDayList"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
-    Route::get("steps/allUserSteps", [UserStepsController::class, "allUserSteps"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+    Route::post("steps/incUserSteps", [UserStepsController::class, "userStepInc"]); // Adım Sayısını Arttırır
+    Route::post("steps/lastSevenDayList", [UserStepsController::class, "lastSevenDayList"]); // Son 7 Günün Adım Sayılarını Getirir
+    Route::get("steps/allUserSteps", [UserStepsController::class, "allUserSteps"]); // Bütün Adımları Getirir
+    Route::get("steps/getCurrentStep", [UserStepsController::class, "getCurrentStep"]); // Anlık Adım Sayısını Getirir
 
-    Route::post("iban/transfer", [IbanTransfersController::class, "transfer"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
-    Route::get("iban/listTransfers", [IbanTransfersController::class, "listTransfers"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
 
-    Route::post('orders/create', [OrdersController::class, 'create']);
-    Route::get('orders/list', [OrdersController::class, 'userOrderList']);
+    Route::post("iban/transfer", [IbanTransfersController::class, "transfer"]); // Iban Transferi Yapar
+    Route::get("iban/listTransfers", [IbanTransfersController::class, "listTransfers"]); // Iban Transferlerini Listeler
+
+    Route::post('orders/create', [OrdersController::class, 'create']); // Sipariş Oluşturur
+    Route::get('orders/list', [OrdersController::class, 'userOrderList']); // Kullanıcının Siparişlerini Listeler
 });
 
 

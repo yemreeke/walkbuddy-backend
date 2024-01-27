@@ -8,6 +8,24 @@ use Illuminate\Support\Facades\Auth;
 class UserStepsController extends Controller
 {
     //
+    public function getCurrentStep(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $nowDayStep = $user->userSteps()->whereDate('created_at', now())->first();
+            if ($nowDayStep) {
+                return response()->success($nowDayStep);
+            } else {
+                return response()->success([
+                    'step_count' => 0,
+                ]);
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
+        } catch (\Exception $e) {
+            return response()->error('Giriş Başarısız', $e->getMessage(), 500);
+        }
+    }
 
     public function userStepInc(Request $request)
     {
@@ -19,8 +37,8 @@ class UserStepsController extends Controller
             $step = $request->step;
             $nowDayStep = $user->userSteps()->whereDate('created_at', now())->first();
             if ($nowDayStep) {
-                if ($nowDayStep->step_count + $step > 2000) {
-                    return response()->error("Günlük 2000 adım limitin üstüne çıkamazsınız.", "", 400);
+                if ($nowDayStep->step_count + $step > 10000) {
+                    return response()->error("Günlük 10000 adım limitin üstüne çıkamazsınız.", "", 400);
                 } else {
                     $user->coin_count += $step;
                     $user->save();
