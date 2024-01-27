@@ -48,7 +48,7 @@ class IbanTransfersController extends Controller
     {
         try {
             $user = Auth::user();
-            $allTransfers = $user->ibanTransfers()->get();
+            $allTransfers = $user->ibanTransfers()->orderBy('created_at', 'desc')->get();
             return response()->success($allTransfers);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları

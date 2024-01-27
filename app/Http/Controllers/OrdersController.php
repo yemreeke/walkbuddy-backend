@@ -13,7 +13,7 @@ class OrdersController extends Controller
     public function userOrderlist(Request $request)
     {
         $user = Auth::user();
-        $orders = $user->orders()->with('product')->get();
+        $orders = $user->orders()->orderBy('created_at', 'desc')->with('product')->get();
         return response()->json($orders);
     }
 

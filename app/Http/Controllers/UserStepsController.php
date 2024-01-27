@@ -65,7 +65,7 @@ class UserStepsController extends Controller
     {
         try {
             $user = Auth::user();
-            $allUserSteps = $user->userSteps()->get();
+            $allUserSteps = $user->userSteps()->orderBy('created_at', 'desc')->get();
             return response()->success($allUserSteps);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
