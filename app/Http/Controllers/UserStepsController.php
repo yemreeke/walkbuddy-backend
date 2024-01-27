@@ -13,13 +13,9 @@ class UserStepsController extends Controller
         try {
             $user = Auth::user();
             $nowDayStep = $user->userSteps()->whereDate('created_at', now())->first();
-            if ($nowDayStep) {
-                return response()->success($nowDayStep);
-            } else {
-                return response()->success([
-                    'step_count' => 0,
-                ]);
-            }
+            return response()->success([
+                'step_count' => $nowDayStep->step_count ?? 0,
+            ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
         } catch (\Exception $e) {
