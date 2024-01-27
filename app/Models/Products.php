@@ -15,6 +15,10 @@ class Products extends Model
         "coin",
         "image_url"
     ];
+    protected $hidden = [
+        "created_at",
+        "updated_at"
+    ];
 
     public function orders()
     {
