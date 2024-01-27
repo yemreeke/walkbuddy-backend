@@ -15,6 +15,7 @@ class UserStepsController extends Controller
             $nowDayStep = $user->userSteps()->whereDate('created_at', now())->first();
             return response()->success([
                 'step_count' => $nowDayStep->step_count ?? 0,
+                "coin_count" => $user->coin_count ?? 0,
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
@@ -42,6 +43,9 @@ class UserStepsController extends Controller
                     $nowDayStep->save();
                 }
             } else {
+                if ($step > 10000) {
+                    return response()->error("Günlük 10000 adım limitin üstüne çıkamazsınız.", "", 400);
+                }
                 $user->coin_count += $step;
                 $user->save();
                 $user->userSteps()->create([
