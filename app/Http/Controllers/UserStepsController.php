@@ -84,7 +84,7 @@ class UserStepsController extends Controller
                 $step = $user->userSteps()->whereDate('created_at', '=', $date)->get()->first();
                 $dayInfo = [
                     'date' => $date->toDateTimeString(),
-                    'count' => $step->step_count ?? 0,
+                    "count" => ($step->step_count) ?? 0,
                 ];
                 array_push($sevenDayList, $dayInfo);
             }

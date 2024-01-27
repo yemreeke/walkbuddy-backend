@@ -14,5 +14,8 @@ class UserSteps extends Model
         'step_count',
     ];
 
+    protected $casts = [
+        "step_count" => "integer",
+    ];
 
 }
