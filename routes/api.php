@@ -26,7 +26,7 @@ Route::middleware(["jwt"])->group(function () {
     Route::put("user/changePassword", [UserController::class, "changePassword"]); // Kullanıcı şifresini günceller
 
     Route::post("steps/incUserSteps", [UserStepsController::class, "userStepInc"]); // Adım Sayısını Arttırır
-    Route::post("steps/lastSevenDayList", [UserStepsController::class, "lastSevenDayList"]); // Son 7 Günün Adım Sayılarını Getirir
+    Route::get("steps/lastSevenDayList", [UserStepsController::class, "lastSevenDayList"]); // Son 7 Günün Adım Sayılarını Getirir
     Route::get("steps/allUserSteps", [UserStepsController::class, "allUserSteps"]); // Bütün Adımları Getirir
     Route::get("steps/getCurrentStep", [UserStepsController::class, "getCurrentStep"]); // Anlık Adım Sayısını Getirir
 
