@@ -14,7 +14,7 @@ class OrdersController extends Controller
     {
         $user = Auth::user();
         $orders = $user->orders()->orderBy('created_at', 'desc')->with('product')->get();
-        return response()->json($orders);
+        return response()->success($orders);
     }
 
     public function create(Request $request)
