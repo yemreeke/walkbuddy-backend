@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IbanTransfersController;
 use App\Http\Controllers\UserStepsController;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('user/login', [UserController::class, 'login']);
 Route::post('user/register', [UserController::class, 'register']);
+Route::get('products/list', [ProductsController::class, 'list']);
 
 
 
@@ -25,7 +28,13 @@ Route::middleware(["jwt"])->group(function () {
 
     Route::post("steps/incUserSteps", [UserStepsController::class, "userStepInc"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
     Route::post("steps/lastSevenDayList", [UserStepsController::class, "lastSevenDayList"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+    Route::get("steps/allUserSteps", [UserStepsController::class, "allUserSteps"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+
     Route::post("iban/transfer", [IbanTransfersController::class, "transfer"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+    Route::get("iban/listTransfers", [IbanTransfersController::class, "listTransfers"]); // El İşi Görüntülenme Sayısını Rastgele Arttırır
+
+    Route::post('orders/create', [OrdersController::class, 'create']);
+    Route::get('orders/list', [OrdersController::class, 'userOrderList']);
 });
 
 

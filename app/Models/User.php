@@ -2,11 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\CopyrightMessages;
-use App\Models\Favorites;
-use App\Models\Files;
-use App\Models\Posts;
-use App\Models\SuggestionMessages;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,32 +58,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(IbanTransfers::class, 'user_id', 'id');
     }
 
-
-    // public function files()
-    // {
-    //     return $this->hasMany(Files::class);
-    // }
-
-    // public function favorites()
-    // {
-    //     return $this->hasMany(Favorites::class);
-    // }
-
-
-    // public function suggestion()
-    // {
-    //     return $this->hasMany(SuggestionMessages::class);
-    // }
-
-    // public function copyright()
-    // {
-    //     return $this->hasMany(CopyrightMessages::class);
-    // }
-
-    // public function socialMedias()
-    // {
-    //     return $this->hasMany(UserSocialMedias::class, 'user_id');
-    // }
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'user_id', 'id');
+    }
 
 
     public function getJWTIdentifier()

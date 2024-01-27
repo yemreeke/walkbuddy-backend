@@ -42,4 +42,18 @@ class IbanTransfersController extends Controller
             return response()->error('Giriş Başarısız', $e->getMessage(), 500);
         }
     }
+
+
+    public function listTransfers(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            $allTransfers = $user->ibanTransfers()->get();
+            return response()->success($allTransfers);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->error($e->validator->getMessageBag()->first()); // Validasyon hataları
+        } catch (\Exception $e) {
+            return response()->error('Giriş Başarısız', $e->getMessage(), 500);
+        }
+    }
 }
