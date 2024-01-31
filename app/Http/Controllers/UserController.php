@@ -28,13 +28,10 @@ class UserController extends Controller
             if ($isDelete) {
                 if (Hash::check($credentials['password'], $isDelete->password)) {
                     return response()->error("Kullanıcı hesabı silinmiştir.", "", 400, $request->email);
-                } else {
-                    return response()->error("Hatalı e-posta veya şifre girilmiştir.", "", 400, $request->email);
                 }
             }
             if (Hash::check($credentials['password'], $user->password)) {
                 $token = Auth::attempt($credentials);
-                $user->makeHidden(['fcm_token']);
                 $data = [
                     'user' => $user,
                     'token' => $token,
@@ -74,7 +71,6 @@ class UserController extends Controller
 
 
 
-            // $defaultPhoto = env("UPLOAD_SITE_URL") . 'profile/default.png';
             $user = User::create([
                 'name' => $request->name,
                 'surname' => $request->surname,
@@ -82,7 +78,6 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
             $token = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-            $user->makeHidden(['fcm_token']);
             $data = [
                 'user' => $user,
                 'token' => $token,

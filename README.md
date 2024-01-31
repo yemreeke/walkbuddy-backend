@@ -1,11 +1,23 @@
-DB_HOST=
-DB_PORT=3306
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+php artisan migrate    
+- Bu database/ migrations/ içindeki dosyaları çalıştırır.
+- dosyalar çalışınca database tabloları oluşur.
 
-FTP_USERNAME=
-FTP_PASSWORD=
-FTP_SERVER=
-DISCORD_WEBHOOK=https://discord.com/api/webhooks/1146059757594103869/HvRRb5LlGqNKLFGQ98aKuzgd-EKvl1ASPMsKvoD5C7muD8-Wu4_E_YehpiA2CBcryhm-
 
+php artisan db:seed
+- Bu database/ seeds/ içindeki dosyaları çalıştırır.
+- dosyalar çalışınca database tabloları doldurulur.
+
+routes/api.php 
+- bu dosyada api listesi vardır.
+
+- jwt middleware token kontrolü yapar.
+- token varsa çalışır.
+- token demek kullanıcıya özel veriler apiler demek.
+
+app/Http/Controllers
+- bu dosyada api listesi vardır.
+- api listesindeki apilerin çalışma mantığı burada yazılır.
+- apinin ne iş yaptığı burada yazılır.
+
+app/Http/models
+- bu dosyada database tabloları ile ilişkili modeller vardır.
