@@ -1,3 +1,8 @@
+
+# Mobil Repo
+https://github.com/yemreeke/walkbuddy-mobile
+
+
 php artisan migrate    
 - Bu database/ migrations/ içindeki dosyaları çalıştırır.
 - dosyalar çalışınca database tabloları oluşur.
